@@ -16,6 +16,8 @@ const INITIAL_WEAPON_SLOTS := 2
 const INITIAL_CHARM_SLOTS := 2
 const MAX_WEAPON_SLOTS := 4
 const MAX_CHARM_SLOTS := 4
+const SLOT_UNLOCK_BASE_ORE := 8
+const SLOT_UNLOCK_STEP_ORE := 8
 const BOSS_TIME := 60.0
 const INTERACT_RANGE := 82.0
 const WEAPON_EVOLVE_LEVEL := 3
@@ -1109,8 +1111,8 @@ func _panel_style(bg: Color, border: Color, border_width: int = 2, radius: int =
 
 
 func _setup_start_panel() -> void:
-	start_panel.position = Vector2(56, 340)
-	start_panel.custom_minimum_size = Vector2(608, 430)
+	start_panel.position = Vector2(56, 290)
+	start_panel.custom_minimum_size = Vector2(608, 560)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 16)
 
@@ -1131,6 +1133,20 @@ func _setup_start_panel() -> void:
 	stash_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	stash_label.add_theme_font_size_override("font_size", 22)
 	box.add_child(stash_label)
+
+	var weapon_slot_button := Button.new()
+	weapon_slot_button.name = "WeaponSlot"
+	weapon_slot_button.custom_minimum_size = Vector2(430, 56)
+	weapon_slot_button.add_theme_font_size_override("font_size", 22)
+	weapon_slot_button.pressed.connect(_unlock_weapon_slot)
+	box.add_child(weapon_slot_button)
+
+	var charm_slot_button := Button.new()
+	charm_slot_button.name = "CharmSlot"
+	charm_slot_button.custom_minimum_size = Vector2(430, 56)
+	charm_slot_button.add_theme_font_size_override("font_size", 22)
+	charm_slot_button.pressed.connect(_unlock_charm_slot)
+	box.add_child(charm_slot_button)
 
 	var start_button := Button.new()
 	start_button.text = "ダンジョンへ"
@@ -6152,6 +6168,40 @@ func _current_charm_slots() -> int:
 	return clampi(int(stash.get("charm_slots", INITIAL_CHARM_SLOTS)), INITIAL_CHARM_SLOTS, MAX_CHARM_SLOTS)
 
 
+func _slot_unlock_cost(current_slots: int) -> int:
+	return SLOT_UNLOCK_BASE_ORE + maxi(0, current_slots - INITIAL_WEAPON_SLOTS) * SLOT_UNLOCK_STEP_ORE
+
+
+func _unlock_weapon_slot() -> void:
+	var current := _current_weapon_slots()
+	if current >= MAX_WEAPON_SLOTS:
+		return
+	var cost := _slot_unlock_cost(current)
+	if int(stash["ore"]) < cost:
+		status_label.text = "武器枠解放には鉱石%dが必要。" % cost
+		return
+	stash["ore"] -= cost
+	stash["weapon_slots"] = current + 1
+	save_stash()
+	status_label.text = "武器枠を%dに解放。" % int(stash["weapon_slots"])
+	_update_start_stash()
+
+
+func _unlock_charm_slot() -> void:
+	var current := _current_charm_slots()
+	if current >= MAX_CHARM_SLOTS:
+		return
+	var cost := _slot_unlock_cost(current)
+	if int(stash["ore"]) < cost:
+		status_label.text = "チャーム枠解放には鉱石%dが必要。" % cost
+		return
+	stash["ore"] -= cost
+	stash["charm_slots"] = current + 1
+	save_stash()
+	status_label.text = "チャーム枠を%dに解放。" % int(stash["charm_slots"])
+	_update_start_stash()
+
+
 func _active_weapon_count() -> int:
 	var count := 0
 	for weapon in weapon_levels.keys():
@@ -6464,12 +6514,26 @@ func _update_start_stash() -> void:
 		return
 	var box := start_panel.get_child(0) as VBoxContainer
 	var stash_label := box.get_node("Stash") as Label
+	var weapon_slot_button := box.get_node("WeaponSlot") as Button
+	var charm_slot_button := box.get_node("CharmSlot") as Button
 	stash_label.text = "武器枠 %d/%d  チャーム枠 %d/%d\nラン中に武器・チャーム・遺物を集める" % [
 		_current_weapon_slots(),
 		MAX_WEAPON_SLOTS,
 		_current_charm_slots(),
 		MAX_CHARM_SLOTS,
 	]
+	var weapon_slots := _current_weapon_slots()
+	var charm_slots := _current_charm_slots()
+	weapon_slot_button.visible = weapon_slots < MAX_WEAPON_SLOTS
+	charm_slot_button.visible = charm_slots < MAX_CHARM_SLOTS
+	if weapon_slot_button.visible:
+		var weapon_cost := _slot_unlock_cost(weapon_slots)
+		weapon_slot_button.text = "武器枠 +1  鉱石%d" % weapon_cost
+		weapon_slot_button.disabled = int(stash["ore"]) < weapon_cost
+	if charm_slot_button.visible:
+		var charm_cost := _slot_unlock_cost(charm_slots)
+		charm_slot_button.text = "チャーム枠 +1  鉱石%d" % charm_cost
+		charm_slot_button.disabled = int(stash["ore"]) < charm_cost
 
 
 func _draw_background(size: Vector2) -> void:
