@@ -5172,6 +5172,10 @@ func _open_upgrade_choices() -> void:
 	subtitle.visible = true
 	for i in 3:
 		var button := box.get_node("Upgrade%d" % i) as Button
+		if i >= offered_upgrades.size():
+			button.visible = false
+			continue
+		button.visible = true
 		var upgrade := offered_upgrades[i]
 		_apply_upgrade_button_style(button, upgrade)
 		_update_upgrade_card_button(button, upgrade)
@@ -6126,6 +6130,30 @@ func _apply_chaos_tome(multiplier: float = 1.0) -> void:
 	status_label.text = "カオスチャーム: %s increased." % key
 
 
+func _current_weapon_slots() -> int:
+	return clampi(int(stash.get("weapon_slots", INITIAL_WEAPON_SLOTS)), INITIAL_WEAPON_SLOTS, MAX_WEAPON_SLOTS)
+
+
+func _current_charm_slots() -> int:
+	return clampi(int(stash.get("charm_slots", INITIAL_CHARM_SLOTS)), INITIAL_CHARM_SLOTS, MAX_CHARM_SLOTS)
+
+
+func _active_weapon_count() -> int:
+	var count := 0
+	for weapon in weapon_levels.keys():
+		if int(weapon_levels.get(String(weapon), 0)) > 0:
+			count += 1
+	return count
+
+
+func _active_charm_count() -> int:
+	var count := 0
+	for charm in charm_levels.keys():
+		if int(charm_levels.get(String(charm), 0)) > 0:
+			count += 1
+	return count
+
+
 func _tome_upgrade_pool() -> Array[Dictionary]:
 	var pool: Array[Dictionary] = [
 		{"category": "チャーム", "title": "グロウチャーム", "desc": "XP獲得量アップ", "key": "xp_gain", "amount": 0.18},
@@ -6152,7 +6180,15 @@ func _tome_upgrade_pool() -> Array[Dictionary]:
 		{"category": "チャーム", "title": "インパクトチャーム", "desc": "敵を押し返す力アップ", "key": "knockback", "amount": 0.16},
 		{"category": "チャーム", "title": "クロックチャーム", "desc": "弾と設置効果の持続時間アップ", "key": "duration", "amount": 0.15},
 	]
-	return pool
+	var can_add_charm := _active_charm_count() < _current_charm_slots()
+	var filtered: Array[Dictionary] = []
+	for entry in pool:
+		var charm := entry as Dictionary
+		var charm_id := String(charm.get("key", ""))
+		if int(charm_levels.get(charm_id, 0)) <= 0 and not can_add_charm:
+			continue
+		filtered.append(charm)
+	return filtered
 
 
 func _choose_upgrade(index: int) -> void:
