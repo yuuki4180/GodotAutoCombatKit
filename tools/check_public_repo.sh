@@ -10,7 +10,9 @@ LICENSE
 CONTRIBUTING.md
 SECURITY.md
 docs/architecture.md
+docs/asset_policy.md
 docs/codex_usage_plan.md
+docs/demo_media.md
 docs/impact_and_maintenance.md
 docs/ios_export.md
 docs/testing.md

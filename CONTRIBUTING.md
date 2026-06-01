@@ -11,6 +11,15 @@ Thanks for helping improve Godot Auto Combat Kit. The project is currently a com
 - Improve mobile readability for pickups, enemy silhouettes, hit effects, or UI.
 - Split small, self-contained helpers out of `scripts/main.gd` without changing behavior.
 
+## Good First Contribution Workflow
+
+1. Pick an issue labeled [`good-first-issue`](https://github.com/yuuki4180/GodotAutoCombatKit/labels/good-first-issue).
+2. Comment on the issue with the change you plan to make.
+3. Keep the first pull request small.
+4. Run `./tools/check_public_repo.sh` before opening the pull request.
+5. Include manual smoke-test notes from [docs/testing.md](docs/testing.md).
+6. Add screenshots or short clips for visual changes.
+
 ## Development Setup
 
 1. Install Godot 4.6 or newer.
@@ -26,6 +35,7 @@ Thanks for helping improve Godot Auto Combat Kit. The project is currently a com
 - Explain any balance changes in concrete terms.
 - Avoid broad rewrites unless there is an issue discussing the intended structure.
 - Do not commit personal export credentials, signing identities, or platform-specific secrets.
+- For asset changes, follow [docs/asset_policy.md](docs/asset_policy.md).
 
 ## Coding Style
 

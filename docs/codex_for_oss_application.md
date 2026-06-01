@@ -76,4 +76,5 @@ Character count: 378
 - Add screenshots or a short gameplay GIF to the README if possible.
 - Roadmap issues are open in GitHub.
 - Public OSS rebrand release is published.
+- Asset policy and demo media guide are documented.
 - Confirm the OpenAI Organization ID before submitting.
