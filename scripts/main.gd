@@ -5535,7 +5535,7 @@ func _weapon_choice_desc(weapon: String) -> String:
 	var level := int(weapon_levels.get(weapon, 0))
 	var effect := _weapon_effect(weapon)
 	if level <= 0:
-		return "%s / 新規入手" % effect
+		return "%s / 新規入手 (%d/%d)" % [effect, _active_weapon_count(), _current_weapon_slots()]
 	return "%s / Lv%d -> Lv%d" % [effect, level, level + 1]
 
 
