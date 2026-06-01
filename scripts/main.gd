@@ -8021,6 +8021,8 @@ func load_stash() -> void:
 		return
 	for key in stash.keys():
 		stash[key] = int(cfg.get_value("stash", key, stash[key]))
+	stash["weapon_slots"] = clampi(int(stash.get("weapon_slots", INITIAL_WEAPON_SLOTS)), INITIAL_WEAPON_SLOTS, MAX_WEAPON_SLOTS)
+	stash["charm_slots"] = clampi(int(stash.get("charm_slots", INITIAL_CHARM_SLOTS)), INITIAL_CHARM_SLOTS, MAX_CHARM_SLOTS)
 
 
 func save_stash() -> void:
