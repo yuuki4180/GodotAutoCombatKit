@@ -5458,16 +5458,18 @@ func _upgrade_icon(upgrade: Dictionary) -> Texture2D:
 func _roll_upgrades() -> Array[Dictionary]:
 	var weapon_pool := _weapon_upgrade_pool()
 	var tome_pool := _tome_upgrade_pool()
+	var special_pool := _special_upgrade_pool()
 	var offered: Array[Dictionary] = []
-	if weapon_pool.is_empty() and tome_pool.is_empty():
+	if weapon_pool.is_empty() and tome_pool.is_empty() and special_pool.is_empty():
 		return offered
 	weapon_pool.shuffle()
 	tome_pool.shuffle()
+	special_pool.shuffle()
 	if not weapon_pool.is_empty():
 		offered.append(weapon_pool[0])
 	if not tome_pool.is_empty():
 		offered.append(tome_pool[0])
-	var mixed := weapon_pool.slice(1) + tome_pool.slice(1)
+	var mixed := weapon_pool.slice(1) + tome_pool.slice(1) + special_pool
 	mixed.shuffle()
 	for upgrade in mixed:
 		if offered.size() >= 3:
@@ -5499,6 +5501,12 @@ func _weapon_upgrade_pool() -> Array[Dictionary]:
 			"weapon": weapon_id,
 		})
 	return pool
+
+
+func _special_upgrade_pool() -> Array[Dictionary]:
+	return [
+		{"category": "固有", "title": "フロストハート", "desc": "魔法弾命中時に敵を鈍足化", "key": "frost_chance", "amount": 0.08},
+	]
 
 
 func _roll_weapon_upgrade_stat(upgrade: Dictionary) -> void:
