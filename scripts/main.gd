@@ -5240,8 +5240,14 @@ func _upgrade_state_text(upgrade: Dictionary) -> String:
 		var weapon := String(upgrade.get("weapon", ""))
 		var level := int(weapon_levels.get(weapon, 0))
 		if level <= 0:
-			return "新規"
+			return "新規 %d/%d" % [_active_weapon_count(), _current_weapon_slots()]
 		return "Lv%d -> %d" % [level, level + 1]
+	if String(upgrade.get("category", "")) == "チャーム":
+		var charm := String(upgrade.get("key", ""))
+		var charm_level := int(charm_levels.get(charm, 0))
+		if charm_level <= 0:
+			return "新規 %d/%d" % [_active_charm_count(), _current_charm_slots()]
+		return "Lv%d -> %d" % [charm_level, charm_level + 1]
 	return "強化"
 
 
