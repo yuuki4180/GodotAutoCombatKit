@@ -10,7 +10,7 @@ The form asks for public GitHub profile/repository information. Before submittin
 - Last name: `[your last name]`
 - Email: `[email associated with your ChatGPT account]`
 - GitHub username: `[your public GitHub username]`
-- GitHub repository URL: `[public GitHub repository URL for Dadasivive]`
+- GitHub repository URL: `https://github.com/yuuki4180/Dadasivive`
 - OpenAI Organization ID: `[from platform.openai.com]`
 
 ## Describe Your Role
