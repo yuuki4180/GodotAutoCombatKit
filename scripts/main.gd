@@ -6209,6 +6209,11 @@ func _choose_upgrade(index: int) -> void:
 		if xp >= xp_next:
 			_gain_xp(0)
 		return
+	if String(upgrade.get("category", "")) == "チャーム":
+		if int(charm_levels.get(key, 0)) <= 0 and _active_charm_count() >= _current_charm_slots():
+			status_label.text = "チャーム枠がいっぱい。"
+			return
+		charm_levels[key] = int(charm_levels.get(key, 0)) + 1
 	var amount := _upgrade_amount(upgrade)
 	if key == "cooldown_tome":
 		stats["attack_rate"] = max(0.13, float(stats["attack_rate"]) - 0.035 * amount)
@@ -6278,6 +6283,9 @@ func _choose_upgrade(index: int) -> void:
 
 
 func _apply_weapon_choice(weapon: String, stat_key: String = "", amount: float = 0.0) -> void:
+	if int(weapon_levels.get(weapon, 0)) <= 0 and _active_weapon_count() >= _current_weapon_slots():
+		status_label.text = "武器枠がいっぱい。"
+		return
 	_track_weapon_upgrade(weapon, stat_key, amount)
 
 
