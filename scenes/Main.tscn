@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://dadasivive_main"]
+[gd_scene load_steps=2 format=3 uid="uid://godot_auto_combat_kit_main"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
 

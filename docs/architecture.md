@@ -1,6 +1,6 @@
 # Architecture
 
-Dadasivive is currently a single-scene Godot prototype. Most gameplay logic lives in `scripts/main.gd` so the full loop is easy to inspect in one file while the design is still moving quickly.
+Godot Auto Combat Kit is currently a single-scene Godot prototype. Most gameplay logic lives in `scripts/main.gd` so the full loop is easy to inspect in one file while the design is still moving quickly.
 
 ## Runtime Flow
 

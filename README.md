@@ -1,14 +1,14 @@
-# Dadasivive
+# Godot Auto Combat Kit
 
-Dadasivive is an open-source Godot 4 mobile action prototype for building readable, touch-first survivor-like games.
+Godot Auto Combat Kit is an open-source Godot 4 reference project for building readable, touch-first mobile auto-combat games.
 
-The project is intentionally small enough to study, but it already includes the core pieces of a vertical auto-combat run builder: drag movement, keyboard testing controls, auto-targeting attacks, escalating enemy pressure, pickups, level-up choices, relic-style run modifiers, chests, altars, elites, and a guardian encounter.
+The project is intentionally small enough to study, but it already includes the core pieces of a vertical arena-action run builder: drag movement, keyboard testing controls, auto-targeting attacks, escalating enemy pressure, pickups, level-up choices, relic-style run modifiers, chests, altars, elites, and a guardian encounter.
 
 The goal is not just to ship a game. The goal is to make a practical, inspectable Godot reference for developers who want to understand how mobile action-game systems fit together in one playable loop.
 
 ## Why This Exists
 
-Many Godot examples cover isolated mechanics. Dadasivive aims to be a practical reference for how those mechanics fit together in a phone-first action game loop:
+Many Godot examples cover isolated mechanics. Godot Auto Combat Kit aims to be a practical reference for how those mechanics fit together in a phone-first action game loop:
 
 - portrait mobile layout with desktop-friendly testing controls;
 - readable auto-combat and nearest-target attack behavior;
@@ -16,6 +16,15 @@ Many Godot examples cover isolated mechanics. Dadasivive aims to be a practical 
 - run-only build growth through weapons, charms, and relics;
 - event interruptions such as chests, pots, altars, elites, and a guardian;
 - iOS export defaults that can be adapted by other Godot developers.
+
+## Who This Helps
+
+This project is intended for:
+
+- Godot developers prototyping mobile action games;
+- maintainers who want a compact example of touch-first combat architecture;
+- contributors learning how run-based upgrade loops, pickups, and encounter pacing interact;
+- developers who need a public-safe iOS export preset example.
 
 See [docs/impact_and_maintenance.md](docs/impact_and_maintenance.md) for the project impact statement and maintainer plan.
 
@@ -48,20 +57,31 @@ Desktop testing controls:
 - Mouse or touch drag: move toward the pointer
 - `Space`: dash
 
+## Public Repository Check
+
+Before opening a pull request or publishing a release, run:
+
+```sh
+./tools/check_public_repo.sh
+```
+
+This checks required OSS files, confirms generated local directories are not tracked, and scans public files for common private signing identifiers.
+
 ## Repository Layout
 
 ```text
-assets/                 Game sprites, icons, effects, and UI art.
+assets/                 Prototype sprites, icons, effects, and UI art.
 docs/                   Design notes, roadmap, and maintainer docs.
 scenes/Main.tscn        Main playable scene.
 scripts/main.gd         Current gameplay prototype implementation.
+tools/                  Maintainer checks for public repository hygiene.
 project.godot           Godot project settings.
 export_presets.cfg      Public-safe iOS export preset template.
 ```
 
 ## Project Status
 
-Dadasivive is early-stage and playable, but it is not a finished game. The current goal is to make the prototype useful as an open-source reference for mobile-first Godot action-game implementation.
+Godot Auto Combat Kit is early-stage and playable, but it is not a finished game. The current goal is to make the prototype useful as an open-source reference for mobile-first Godot action-game implementation.
 
 Current public baseline:
 
@@ -79,6 +99,13 @@ Near-term work:
 5. Polish iOS export documentation and touch joystick behavior.
 
 See [docs/roadmap.md](docs/roadmap.md) for more detail.
+See [docs/ios_export.md](docs/ios_export.md) for public-safe iOS export guidance.
+
+Open issues for contributors:
+
+- [Good first issues](https://github.com/yuuki4180/GodotAutoCombatKit/labels/good-first-issue)
+- [Roadmap issues](https://github.com/yuuki4180/GodotAutoCombatKit/labels/roadmap)
+- [Mobile readability tasks](https://github.com/yuuki4180/GodotAutoCombatKit/labels/mobile-readability)
 
 ## Maintainer Workflow
 

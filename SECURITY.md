@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Dadasivive is an early-stage prototype. Security fixes are handled on the `main` branch.
+Godot Auto Combat Kit is an early-stage prototype. Security fixes are handled on the `main` branch.
 
 ## Reporting A Vulnerability
 

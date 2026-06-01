@@ -1,6 +1,6 @@
 # Support
 
-Dadasivive is an early-stage open-source prototype maintained in public.
+Godot Auto Combat Kit is an early-stage open-source prototype maintained in public.
 
 ## Questions
 

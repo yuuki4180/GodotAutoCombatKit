@@ -1,6 +1,6 @@
 extends Node2D
 
-const SAVE_PATH := "user://dadasivive.cfg"
+const SAVE_PATH := "user://godot_auto_combat_kit.cfg"
 const BASE_SIZE := Vector2(720.0, 1280.0)
 const WORLD_SIZE := Vector2(2160.0, 3840.0)
 const PLAYER_RADIUS := 17.0
@@ -12,6 +12,10 @@ const EXTRACTION_ENABLED := false
 const EXTRACTION_KILL_TARGET := 28
 const EXTRACTION_TIME := 95.0
 const BAG_LIMIT := 18
+const INITIAL_WEAPON_SLOTS := 2
+const INITIAL_CHARM_SLOTS := 2
+const MAX_WEAPON_SLOTS := 4
+const MAX_CHARM_SLOTS := 4
 const BOSS_TIME := 60.0
 const INTERACT_RANGE := 82.0
 const WEAPON_EVOLVE_LEVEL := 3
@@ -28,7 +32,7 @@ const NIGHTMARE_GATE_VISUAL_SCALE := 0.36
 const NIGHTMARE_GATE_HIT_SCALE := 0.38
 const NIGHTMARE_GATE_PULL_START := 18.0
 const NIGHTMARE_GATE_PULL_END := 420.0
-const MEGABONK_WEAPON_DEFS := [
+const AUTO_COMBAT_WEAPON_DEFS := [
 	{"id": "aura", "title": "ルーンオーラ", "desc": "周囲の敵にダメージを与える"},
 	{"id": "flamewalker", "title": "フレアステップ", "desc": "後ろに火の跡を残す"},
 	{"id": "katana", "title": "ムーンスラッシュ", "desc": "近くの敵を狙う鋭い刃"},
@@ -463,6 +467,8 @@ var stash := {
 	"ore": 0,
 	"best_value": 0,
 	"camp_damage": 0,
+	"weapon_slots": INITIAL_WEAPON_SLOTS,
+	"charm_slots": INITIAL_CHARM_SLOTS,
 }
 
 var stats := {}
@@ -482,6 +488,7 @@ var effects: Array[Dictionary] = []
 var beams: Array[Dictionary] = []
 var offered_upgrades: Array[Dictionary] = []
 var weapon_levels := {}
+var charm_levels := {}
 var evolved_weapons := {}
 var weapon_timers := {}
 var weapon_stat_bonuses := {}
@@ -729,7 +736,7 @@ func _process(delta: float) -> void:
 			_fire_at_nearest_enemy()
 		attack_timer = max(0.1, float(stats["attack_rate"]))
 
-	_update_megabonk_weapons(delta)
+	_update_auto_combat_weapons(delta)
 	_update_aura_damage(delta)
 	if test_weapon_only_mode and int(weapon_levels.get(test_weapon_selected_id, 0)) <= 0:
 		_clear_test_weapon_combat_artifacts()
@@ -955,11 +962,12 @@ func start_run(test_stage: bool = false) -> void:
 		"key_open_chance": 0.0,
 	}
 	weapon_levels = {}
+	charm_levels = {}
 	evolved_weapons = {}
 	weapon_timers = {}
 	acquired_relics = []
 	treasure_counts = {}
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		var weapon_id := String(def["id"])
 		weapon_levels[weapon_id] = 0
@@ -1107,7 +1115,7 @@ func _setup_start_panel() -> void:
 	box.add_theme_constant_override("separation", 16)
 
 	var title := Label.new()
-	title.text = "Dadasivive"
+	title.text = "Godot Auto Combat Kit"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 48)
 	box.add_child(title)
@@ -1699,7 +1707,7 @@ func _setup_test_panel() -> void:
 	weapon_select.name = "WeaponSelect"
 	weapon_select.custom_minimum_size = Vector2(620, 44)
 	weapon_select.add_theme_font_size_override("font_size", 18)
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		var weapon_id := String(def["id"])
 		if HIDDEN_WEAPON_IDS.has(weapon_id):
@@ -2336,7 +2344,7 @@ func _should_fire_base_attack() -> bool:
 
 
 func _has_active_weapon() -> bool:
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		if int(weapon_levels.get(String(def["id"]), 0)) > 0:
 			return true
@@ -2361,8 +2369,8 @@ func _enemy_index_by_id(enemy_id: int) -> int:
 	return -1
 
 
-func _update_megabonk_weapons(delta: float) -> void:
-	for entry in MEGABONK_WEAPON_DEFS:
+func _update_auto_combat_weapons(delta: float) -> void:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		var weapon_id := String(def["id"])
 		if test_weapon_only_mode and weapon_id != test_weapon_selected_id:
@@ -2375,8 +2383,8 @@ func _update_megabonk_weapons(delta: float) -> void:
 		weapon_timers[weapon_id] = maxf(0.0, float(weapon_timers.get(weapon_id, 0.0)) - delta)
 		if float(weapon_timers[weapon_id]) > 0.0:
 			continue
-		_trigger_megabonk_weapon(weapon_id, level)
-		weapon_timers[weapon_id] = _megabonk_weapon_cooldown(weapon_id, level)
+		_trigger_auto_combat_weapon(weapon_id, level)
+		weapon_timers[weapon_id] = _auto_combat_weapon_cooldown(weapon_id, level)
 
 
 func _update_queued_projectile_shots(delta: float) -> void:
@@ -2390,7 +2398,7 @@ func _update_queued_projectile_shots(delta: float) -> void:
 		_fire_queued_projectile_shot(shot)
 
 
-func _trigger_megabonk_weapon(weapon_id: String, level: int) -> void:
+func _trigger_auto_combat_weapon(weapon_id: String, level: int) -> void:
 	var power := int(round(float(stats["damage"]) + level * 5.0))
 	match weapon_id:
 		"flamewalker":
@@ -2459,7 +2467,7 @@ func _trigger_megabonk_weapon(weapon_id: String, level: int) -> void:
 			_spawn_attack_image_fx(player_pos, "moon_blade", 104.0 + level * 10.0, elapsed * 2.6, 0.30, 0.82, 0.8)
 			_damage_enemies_in_radius(player_pos, 82.0 + level * 7.0, int(power * 1.12), Color(0.9, 0.96, 1.0, 0.62), 0.0, 0.0, Vector2.ZERO, weapon_id)
 		"landmine":
-			_place_megabonk_mine(level, power, weapon_id)
+			_place_auto_combat_mine(level, power, weapon_id)
 		"poison_flask":
 			_shoot_weapon_projectiles(1 + int(level / 3), int(power * 0.58), 560.0, 0.86, 0.18, 0, false, "venom_bottle", weapon_id)
 		"dragon_breath":
@@ -2476,7 +2484,7 @@ func _trigger_megabonk_weapon(weapon_id: String, level: int) -> void:
 			_cast_gravity_spike(level, power, weapon_id)
 
 
-func _megabonk_weapon_cooldown(weapon_id: String, level: int) -> float:
+func _auto_combat_weapon_cooldown(weapon_id: String, level: int) -> float:
 	var base := 2.2
 	match weapon_id:
 		"flamewalker":
@@ -3534,7 +3542,7 @@ func _explode_near_enemy(radius: float, damage: int, color: Color, zone_life: fl
 		_add_damage_zone(center, radius * 0.72, zone_life, maxi(5, int(damage * 0.22)), color, 0.0, "zone", Vector2.ZERO, weapon_id)
 
 
-func _place_megabonk_mine(level: int, damage: int, weapon_id: String = "") -> void:
+func _place_auto_combat_mine(level: int, damage: int, weapon_id: String = "") -> void:
 	mines.append({
 		"pos": player_pos,
 		"life": (6.0 + level * 0.35) * _weapon_stat_multiplier(weapon_id, "duration"),
@@ -5132,7 +5140,7 @@ func _choose_altar_relic(index: int) -> void:
 
 
 func _apply_random_weapon_boost() -> void:
-	var weapon := _random_megabonk_weapon_id()
+	var weapon := _random_auto_combat_weapon_id()
 	_track_weapon_upgrade(weapon)
 	status_label.text = "Cursed machine: %s Lv%d." % [_weapon_title(weapon), int(weapon_levels.get(weapon, 0))]
 
@@ -5441,13 +5449,20 @@ func _roll_upgrades() -> Array[Dictionary]:
 	var weapon_pool := _weapon_upgrade_pool()
 	var tome_pool := _tome_upgrade_pool()
 	var offered: Array[Dictionary] = []
+	if weapon_pool.is_empty() and tome_pool.is_empty():
+		return offered
 	weapon_pool.shuffle()
 	tome_pool.shuffle()
-	offered.append(weapon_pool[0])
-	offered.append(tome_pool[0])
+	if not weapon_pool.is_empty():
+		offered.append(weapon_pool[0])
+	if not tome_pool.is_empty():
+		offered.append(tome_pool[0])
 	var mixed := weapon_pool.slice(1) + tome_pool.slice(1)
 	mixed.shuffle()
-	offered.append(mixed[0])
+	for upgrade in mixed:
+		if offered.size() >= 3:
+			break
+		offered.append(upgrade)
 	offered.shuffle()
 	for i in offered.size():
 		offered[i]["rarity"] = _roll_upgrade_rarity()
@@ -5458,10 +5473,13 @@ func _roll_upgrades() -> Array[Dictionary]:
 
 func _weapon_upgrade_pool() -> Array[Dictionary]:
 	var pool: Array[Dictionary] = []
-	for entry in MEGABONK_WEAPON_DEFS:
+	var can_add_weapon := _active_weapon_count() < _current_weapon_slots()
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		var weapon_id := String(def["id"])
 		if HIDDEN_WEAPON_IDS.has(weapon_id):
+			continue
+		if int(weapon_levels.get(weapon_id, 0)) <= 0 and not can_add_weapon:
 			continue
 		pool.append({
 			"category": "武器",
@@ -5470,7 +5488,6 @@ func _weapon_upgrade_pool() -> Array[Dictionary]:
 			"key": "weapon_%s" % weapon_id,
 			"weapon": weapon_id,
 		})
-	pool.append({"category": "固有", "title": "フロストハート", "desc": "魔法弾命中時に敵を鈍足化", "key": "frost_chance", "amount": 0.08})
 	return pool
 
 
@@ -5513,7 +5530,7 @@ func _weapon_choice_desc(weapon: String) -> String:
 
 
 func _weapon_title(weapon: String) -> String:
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		if String(def["id"]) == weapon:
 			return String(def["title"])
@@ -5521,7 +5538,7 @@ func _weapon_title(weapon: String) -> String:
 
 
 func _weapon_effect(weapon: String) -> String:
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		if String(def["id"]) == weapon:
 			return String(def["desc"])
@@ -5593,9 +5610,9 @@ func _apply_weapon_stat_bonus(weapon: String, stat_key: String, amount: float) -
 	weapon_stat_bonuses[weapon] = weapon_bonuses
 
 
-func _random_megabonk_weapon_id() -> String:
+func _random_auto_combat_weapon_id() -> String:
 	var visible_defs: Array[Dictionary] = []
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		if not HIDDEN_WEAPON_IDS.has(String(def["id"])):
 			visible_defs.append(def)
@@ -5608,7 +5625,7 @@ func _test_add_next_weapon() -> void:
 	if not test_mode:
 		return
 	var visible_defs: Array[Dictionary] = []
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var candidate := entry as Dictionary
 		if not HIDDEN_WEAPON_IDS.has(String(candidate["id"])):
 			visible_defs.append(candidate)
@@ -5622,7 +5639,7 @@ func _test_add_next_weapon() -> void:
 func _test_all_weapons() -> void:
 	if not test_mode:
 		return
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		var weapon_id := String(def["id"])
 		if HIDDEN_WEAPON_IDS.has(weapon_id):
@@ -5673,8 +5690,8 @@ func _toggle_test_weapon_panel() -> void:
 		return
 	test_weapon_panel_open = not test_weapon_panel_open
 	test_weapon_only_mode = test_weapon_panel_open
-	if test_weapon_panel_open and test_weapon_selected_id.is_empty() and MEGABONK_WEAPON_DEFS.size() > 0:
-		var def := MEGABONK_WEAPON_DEFS[0] as Dictionary
+	if test_weapon_panel_open and test_weapon_selected_id.is_empty() and AUTO_COMBAT_WEAPON_DEFS.size() > 0:
+		var def := AUTO_COMBAT_WEAPON_DEFS[0] as Dictionary
 		test_weapon_selected_id = String(def["id"])
 	if test_weapon_panel_open:
 		_clear_test_weapon_combat_artifacts()
@@ -5731,7 +5748,7 @@ func _test_solo_selected_weapon() -> void:
 		return
 	test_weapon_panel_open = true
 	test_weapon_only_mode = true
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		var weapon_id := String(def["id"])
 		if HIDDEN_WEAPON_IDS.has(weapon_id):
@@ -5750,7 +5767,7 @@ func _test_solo_selected_weapon() -> void:
 func _test_clear_all_weapons() -> void:
 	if not test_mode:
 		return
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		var weapon_id := String(def["id"])
 		if HIDDEN_WEAPON_IDS.has(weapon_id):
@@ -5769,13 +5786,13 @@ func _refresh_test_weapon_panel() -> void:
 	var list := _test_weapon_list()
 	if list == null:
 		return
-	if test_weapon_selected_id.is_empty() and MEGABONK_WEAPON_DEFS.size() > 0:
-		var first := MEGABONK_WEAPON_DEFS[0] as Dictionary
+	if test_weapon_selected_id.is_empty() and AUTO_COMBAT_WEAPON_DEFS.size() > 0:
+		var first := AUTO_COMBAT_WEAPON_DEFS[0] as Dictionary
 		test_weapon_selected_id = String(first["id"])
 
 	list.clear()
 	var selected_index := 0
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		var weapon_id := String(def["id"])
 		if HIDDEN_WEAPON_IDS.has(weapon_id):
@@ -5819,7 +5836,7 @@ func _test_weapon_detail() -> VBoxContainer:
 
 
 func _weapon_def_by_id(weapon_id: String) -> Dictionary:
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		if String(def["id"]) == weapon_id:
 			return def
@@ -6362,7 +6379,7 @@ func _update_ui() -> void:
 func _active_weapon_summary() -> String:
 	var parts: Array[String] = []
 	var active_count := 0
-	for entry in MEGABONK_WEAPON_DEFS:
+	for entry in AUTO_COMBAT_WEAPON_DEFS:
 		var def := entry as Dictionary
 		var weapon_id := String(def["id"])
 		var level := int(weapon_levels.get(weapon_id, 0))

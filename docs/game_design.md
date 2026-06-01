@@ -1,13 +1,13 @@
-# Dadasivive Game Design Notes
+# Godot Auto Combat Kit Design Notes
 
 ## Short Pitch
 
-`Dadasivive` is currently scoped as a vertical iOS auto-combat run builder. Moment-to-moment play follows a Megabonk-style loop: move, kite, dodge, collect XP, choose weapons or charms, stack relics, and survive escalating waves.
+`Godot Auto Combat Kit` is currently scoped as a vertical iOS auto-combat run-builder reference. Moment-to-moment play focuses on moving, kiting, dodging, collecting XP, choosing weapons or charms, stacking relics, and surviving escalating waves.
 
-## Reference Mix
+## Design Direction
 
-- Megabonk side: temporary weapon growth, charm/stat choices, relic synergies, chests, altars, elites, and boss pressure.
-- Visual direction: Survivor.io / ダダサバイバー-like mobile readability, bright silhouettes, clear pickups, and simple touch-first play.
+- Run-builder systems: temporary weapon growth, charm/stat choices, relic synergies, chests, altars, elites, and boss pressure.
+- Mobile clarity: bright silhouettes, clear pickups, readable threats, and simple touch-first play.
 
 ## MVP Loop
 

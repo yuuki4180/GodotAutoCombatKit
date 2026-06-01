@@ -1,6 +1,6 @@
 # Roadmap
 
-This roadmap is scoped around making Dadasivive a useful open-source Godot mobile action reference.
+This roadmap is scoped around making Godot Auto Combat Kit a useful open-source Godot mobile action reference.
 
 ## Phase 1: Public OSS Baseline
 

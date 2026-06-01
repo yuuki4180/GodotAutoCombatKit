@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-We want Dadasivive to be a useful and respectful open-source project. Contributors and maintainers are expected to communicate with care, assume good intent, and focus on the work.
+We want Godot Auto Combat Kit to be a useful and respectful open-source project. Contributors and maintainers are expected to communicate with care, assume good intent, and focus on the work.
 
 ## Expected Behavior
 
