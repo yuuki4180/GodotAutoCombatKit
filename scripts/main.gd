@@ -6449,8 +6449,14 @@ func _active_weapon_summary() -> String:
 	if active_count > parts.size():
 		parts.append("+%d" % (active_count - parts.size()))
 	if parts.is_empty():
-		return "武器なし"
-	return "武器: %s" % "  ".join(parts)
+		return "武器 0/%d  チャーム %d/%d" % [_current_weapon_slots(), _active_charm_count(), _current_charm_slots()]
+	return "武器 %d/%d: %s  チャーム %d/%d" % [
+		active_count,
+		_current_weapon_slots(),
+		"  ".join(parts),
+		_active_charm_count(),
+		_current_charm_slots(),
+	]
 
 
 func _update_start_stash() -> void:
@@ -6458,7 +6464,12 @@ func _update_start_stash() -> void:
 		return
 	var box := start_panel.get_child(0) as VBoxContainer
 	var stash_label := box.get_node("Stash") as Label
-	stash_label.text = "ラン中に武器・チャーム・遺物を集める\nゴール: 長く生き残り、守護者を倒す"
+	stash_label.text = "武器枠 %d/%d  チャーム枠 %d/%d\nラン中に武器・チャーム・遺物を集める" % [
+		_current_weapon_slots(),
+		MAX_WEAPON_SLOTS,
+		_current_charm_slots(),
+		MAX_CHARM_SLOTS,
+	]
 
 
 func _draw_background(size: Vector2) -> void:
