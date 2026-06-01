@@ -11,6 +11,7 @@ The form asks for public GitHub profile/repository information. Before submittin
 - Email: `[email associated with your ChatGPT account]`
 - GitHub username: `[your public GitHub username]`
 - GitHub repository URL: `https://github.com/yuuki4180/Dadasivive`
+- Baseline release: `https://github.com/yuuki4180/Dadasivive/releases/tag/v0.1.0-oss-baseline`
 - OpenAI Organization ID: `[from platform.openai.com]`
 
 ## Describe Your Role
@@ -73,6 +74,6 @@ Character count: 378
 - Publish the repository on GitHub and confirm it is public.
 - Set the GitHub profile visibility to public.
 - Add screenshots or a short gameplay GIF to the README if possible.
-- Open a few roadmap issues so active maintenance is visible.
-- Create a first public baseline release.
+- Roadmap issues are open in GitHub.
+- First public baseline release is published.
 - Confirm the OpenAI Organization ID before submitting.
