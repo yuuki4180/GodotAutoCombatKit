@@ -1,0 +1,27 @@
+# Godot local/editor state
+.godot/
+.godot-user/
+
+# Godot import/cache artifacts
+.import/
+*.translation
+
+# Build outputs
+build/
+dist/
+exports/
+*.zip
+*.ipa
+*.apk
+*.aab
+*.dmg
+
+# Local scratch files
+tmp/
+backups/
+.DS_Store
+
+# Logs and local env
+*.log
+.env
+.env.*
