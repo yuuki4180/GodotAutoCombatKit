@@ -4,6 +4,8 @@ Dadasivive is an open-source Godot 4 mobile action prototype for building readab
 
 The project is intentionally small enough to study, but it already includes the core pieces of a vertical auto-combat run builder: drag movement, keyboard testing controls, auto-targeting attacks, escalating enemy pressure, pickups, level-up choices, relic-style run modifiers, chests, altars, elites, and a guardian encounter.
 
+The goal is not just to ship a game. The goal is to make a practical, inspectable Godot reference for developers who want to understand how mobile action-game systems fit together in one playable loop.
+
 ## Why This Exists
 
 Many Godot examples cover isolated mechanics. Dadasivive aims to be a practical reference for how those mechanics fit together in a phone-first action game loop:
@@ -14,6 +16,8 @@ Many Godot examples cover isolated mechanics. Dadasivive aims to be a practical 
 - run-only build growth through weapons, charms, and relics;
 - event interruptions such as chests, pots, altars, elites, and a guardian;
 - iOS export defaults that can be adapted by other Godot developers.
+
+See [docs/impact_and_maintenance.md](docs/impact_and_maintenance.md) for the project impact statement and maintainer plan.
 
 ## Current Prototype
 
@@ -59,6 +63,13 @@ export_presets.cfg      Public-safe iOS export preset template.
 
 Dadasivive is early-stage and playable, but it is not a finished game. The current goal is to make the prototype useful as an open-source reference for mobile-first Godot action-game implementation.
 
+Current public baseline:
+
+- MIT-licensed Godot project files and GDScript.
+- Public-safe export preset with personal signing data removed.
+- Contribution, security, issue, and pull request templates.
+- Maintainer documentation and a roadmap.
+
 Near-term work:
 
 1. Split large gameplay systems out of `scripts/main.gd` into smaller Godot scripts.
@@ -68,6 +79,21 @@ Near-term work:
 5. Polish iOS export documentation and touch joystick behavior.
 
 See [docs/roadmap.md](docs/roadmap.md) for more detail.
+
+## Maintainer Workflow
+
+The project is maintained as a small OSS reference implementation:
+
+- issues track reproducible bugs, roadmap tasks, and mobile-readability improvements;
+- pull requests should include manual smoke-test notes;
+- releases will summarize playable prototype milestones;
+- security-sensitive reports should be handled privately through [SECURITY.md](SECURITY.md).
+
+The intended Codex workflow is documented in [docs/codex_usage_plan.md](docs/codex_usage_plan.md).
+
+## Testing
+
+There is no automated Godot test suite yet. Manual smoke testing is documented in [docs/testing.md](docs/testing.md), and adding deterministic smoke checks is part of the near-term roadmap.
 
 ## Contributing
 

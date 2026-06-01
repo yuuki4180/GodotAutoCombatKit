@@ -20,7 +20,7 @@ Recommended selection: `Primary maintainer`
 Suggested text:
 
 ```text
-I am the primary maintainer and original author of Dadasivive. I own the project direction, implementation, asset integration, iOS/Godot build configuration, release scope, issue triage, and review of future contributions.
+I am the primary maintainer and original author of Dadasivive. I own the project direction, Godot/GDScript implementation, asset integration, iOS export configuration, roadmap, issue triage, release notes, and review of future pull requests.
 ```
 
 ## Why Does This Repository Qualify?
@@ -30,10 +30,10 @@ Limit: 500 characters.
 Suggested text:
 
 ```text
-Dadasivive is an open-source Godot 4 mobile action-game reference focused on touch-first auto-combat and portrait readability. It provides a runnable survivor-like prototype with auto-targeting, waves, pickups, upgrades, relics, chests, altars, elites, and a guardian encounter, helping other Godot developers study practical mobile run-builder systems.
+Dadasivive is an open-source Godot 4 reference for mobile action games, focused on touch-first controls, portrait readability, and auto-combat run-builder systems. It is early but runnable, MIT-licensed, and documents a complete loop: waves, pickups, upgrades, relics, chests, altars, elites, and a guardian encounter for other Godot developers to study.
 ```
 
-Character count: 353
+Character count: 354
 
 If the repository already has stars, forks, downloads, or community usage, replace the last sentence with those concrete numbers.
 
@@ -51,10 +51,10 @@ Limit: 500 characters.
 Suggested text:
 
 ```text
-I will use API credits for Codex-assisted OSS maintenance: reviewing pull requests, finding regressions in GDScript gameplay systems, generating focused tests or reproduction notes, improving Godot/iOS export documentation, and automating release-check summaries. Credits would reduce maintenance load while keeping the project open and easier for contributors to understand.
+I will use API credits for Codex-assisted OSS maintenance: reviewing pull requests, triaging issues, finding regressions across GDScript gameplay systems, drafting focused tests or reproduction notes, improving Godot/iOS export docs, and preparing release summaries. Credits would reduce review load and help keep the reference project understandable for contributors.
 ```
 
-Character count: 375
+Character count: 368
 
 ## Anything Else We Should Know?
 
@@ -63,14 +63,16 @@ Limit: 500 characters.
 Suggested text:
 
 ```text
-Dadasivive is early-stage but already structured as a public OSS project with an MIT license, contribution guide, security policy, issue templates, roadmap, and public-safe iOS export preset. Support from Codex would help turn the playable prototype into a cleaner reference-quality Godot project for mobile action-game developers.
+Dadasivive is intentionally transparent about being early-stage: it has no adoption claims yet, but it is structured for active maintenance with an MIT license, contribution guide, security policy, issue templates, roadmap, architecture notes, maintainer playbook, and public-safe iOS export preset. Codex support would help mature it into a reference-quality Godot OSS project.
 ```
 
-Character count: 331
+Character count: 378
 
 ## Submission Checklist
 
 - Publish the repository on GitHub and confirm it is public.
 - Set the GitHub profile visibility to public.
 - Add screenshots or a short gameplay GIF to the README if possible.
+- Open a few roadmap issues so active maintenance is visible.
+- Create a first public baseline release.
 - Confirm the OpenAI Organization ID before submitting.
