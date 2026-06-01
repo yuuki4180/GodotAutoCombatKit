@@ -1,6 +1,6 @@
 # Notice
 
-Dadasivive is intended to be published as an open-source Godot reference project.
+Godot Auto Combat Kit is intended to be published as an open-source Godot reference project.
 
 ## Code
 
@@ -14,4 +14,4 @@ If you replace, add, or regenerate assets, include source notes in the pull requ
 
 ## Trademarks And References
 
-Dadasivive is an independent prototype. Names of other games or tools in documentation are used only as design references.
+Godot Auto Combat Kit is an independent open-source reference project. It is not affiliated with, endorsed by, or derived from any commercial mobile game. Names of other games or tools in documentation are used only as general technical or design context when needed.

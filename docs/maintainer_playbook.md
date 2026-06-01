@@ -28,6 +28,6 @@ Run `scenes/Main.tscn` in Godot and check:
 
 ## Application Positioning
 
-For open-source support programs, describe Dadasivive as:
+For open-source support programs, describe Godot Auto Combat Kit as:
 
-> an open-source Godot 4 mobile action-game reference project focused on touch-first auto-combat, portrait readability, and maintainable survivor-like run-builder systems.
+> an open-source Godot 4 mobile action-game reference project focused on touch-first auto-combat, portrait readability, and maintainable run-builder systems.

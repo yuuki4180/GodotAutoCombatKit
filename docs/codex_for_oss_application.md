@@ -10,8 +10,8 @@ The form asks for public GitHub profile/repository information. Before submittin
 - Last name: `[your last name]`
 - Email: `[email associated with your ChatGPT account]`
 - GitHub username: `[your public GitHub username]`
-- GitHub repository URL: `https://github.com/yuuki4180/Dadasivive`
-- Baseline release: `https://github.com/yuuki4180/Dadasivive/releases/tag/v0.1.0-oss-baseline`
+- GitHub repository URL: `https://github.com/yuuki4180/GodotAutoCombatKit`
+- Baseline release: `https://github.com/yuuki4180/GodotAutoCombatKit/releases/tag/v0.1.0-oss-baseline`
 - OpenAI Organization ID: `[from platform.openai.com]`
 
 ## Describe Your Role
@@ -21,7 +21,7 @@ Recommended selection: `Primary maintainer`
 Suggested text:
 
 ```text
-I am the primary maintainer and original author of Dadasivive. I own the project direction, Godot/GDScript implementation, asset integration, iOS export configuration, roadmap, issue triage, release notes, and review of future pull requests.
+I am the primary maintainer and original author of Godot Auto Combat Kit. I own the project direction, Godot/GDScript implementation, asset integration, iOS export configuration, roadmap, issue triage, release notes, and review of future pull requests.
 ```
 
 ## Why Does This Repository Qualify?
@@ -31,7 +31,7 @@ Limit: 500 characters.
 Suggested text:
 
 ```text
-Dadasivive is an open-source Godot 4 reference for mobile action games, focused on touch-first controls, portrait readability, and auto-combat run-builder systems. It is early but runnable, MIT-licensed, and documents a complete loop: waves, pickups, upgrades, relics, chests, altars, elites, and a guardian encounter for other Godot developers to study.
+Godot Auto Combat Kit is an open-source Godot 4 reference for mobile action games, focused on touch-first controls, portrait readability, and auto-combat run-builder systems. It is early but runnable, MIT-licensed, and documents a complete loop: waves, pickups, upgrades, relics, chests, altars, elites, and a guardian encounter for other Godot developers to study.
 ```
 
 Character count: 354
@@ -64,7 +64,7 @@ Limit: 500 characters.
 Suggested text:
 
 ```text
-Dadasivive is intentionally transparent about being early-stage: it has no adoption claims yet, but it is structured for active maintenance with an MIT license, contribution guide, security policy, issue templates, roadmap, architecture notes, maintainer playbook, and public-safe iOS export preset. Codex support would help mature it into a reference-quality Godot OSS project.
+Godot Auto Combat Kit is intentionally transparent about being early-stage: it has no adoption claims yet, but it is structured for active maintenance with an MIT license, contribution guide, security policy, issue templates, roadmap, architecture notes, maintainer playbook, and public-safe iOS export preset. Codex support would help mature it into a reference-quality Godot OSS project.
 ```
 
 Character count: 378

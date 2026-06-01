@@ -1,10 +1,10 @@
 # Impact And Maintenance
 
-This document explains why Dadasivive is being maintained as open source and how it should grow.
+This document explains why Godot Auto Combat Kit is being maintained as open source and how it should grow.
 
 ## Ecosystem Importance
 
-Dadasivive targets a practical gap in Godot learning material: full-loop, mobile-first action-game prototypes are harder to study than isolated examples. The project provides an inspectable reference for:
+Godot Auto Combat Kit targets a practical gap in Godot learning material: full-loop, mobile-first action-game prototypes are harder to study than isolated examples. The project provides an inspectable reference for:
 
 - portrait mobile layout and touch-first control decisions;
 - readable auto-combat behavior;

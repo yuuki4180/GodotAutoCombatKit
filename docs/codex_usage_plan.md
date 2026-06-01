@@ -1,6 +1,6 @@
 # Codex Usage Plan
 
-Dadasivive will use Codex for core open-source maintenance work, not for closed-source product development.
+Godot Auto Combat Kit will use Codex for core open-source maintenance work, not for closed-source product development.
 
 ## Pull Request Review
 

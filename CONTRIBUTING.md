@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve Dadasivive. The project is currently a compact Godot 4 prototype, so the highest-value contributions are focused, easy to review, and tied to playable behavior.
+Thanks for helping improve Godot Auto Combat Kit. The project is currently a compact Godot 4 prototype, so the highest-value contributions are focused, easy to review, and tied to playable behavior.
 
 ## Good First Contributions
 

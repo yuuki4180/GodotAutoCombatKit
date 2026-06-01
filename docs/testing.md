@@ -1,6 +1,6 @@
 # Testing
 
-Dadasivive does not yet have an automated Godot test suite. Until deterministic smoke checks are added, maintainers and contributors should use this manual checklist.
+Godot Auto Combat Kit does not yet have an automated Godot test suite. Until deterministic smoke checks are added, maintainers and contributors should use this manual checklist.
 
 ## Manual Smoke Test
 
@@ -26,6 +26,18 @@ Before exporting:
 - set your own bundle identifier locally;
 - do not commit personal signing identities;
 - keep public export presets free of credentials.
+
+See [docs/ios_export.md](ios_export.md) for details.
+
+## Public Repository Check
+
+Run:
+
+```sh
+./tools/check_public_repo.sh
+```
+
+This verifies required project files, ignored local directories, and common private signing identifiers.
 
 ## Documentation Check
 
