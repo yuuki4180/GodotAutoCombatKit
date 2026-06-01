@@ -11,7 +11,7 @@ The form asks for public GitHub profile/repository information. Before submittin
 - Email: `[email associated with your ChatGPT account]`
 - GitHub username: `[your public GitHub username]`
 - GitHub repository URL: `https://github.com/yuuki4180/GodotAutoCombatKit`
-- Baseline release: `https://github.com/yuuki4180/GodotAutoCombatKit/releases/tag/v0.1.0-oss-baseline`
+- Latest release: `https://github.com/yuuki4180/GodotAutoCombatKit/releases/tag/v0.1.1-oss-rebrand`
 - OpenAI Organization ID: `[from platform.openai.com]`
 
 ## Describe Your Role
@@ -75,5 +75,5 @@ Character count: 378
 - Set the GitHub profile visibility to public.
 - Add screenshots or a short gameplay GIF to the README if possible.
 - Roadmap issues are open in GitHub.
-- First public baseline release is published.
+- Public OSS rebrand release is published.
 - Confirm the OpenAI Organization ID before submitting.
