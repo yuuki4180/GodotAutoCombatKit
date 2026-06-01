@@ -12,6 +12,8 @@ The `assets/` directory contains prototype game art, icons, effects, and generat
 
 If you replace, add, or regenerate assets, include source notes in the pull request and avoid adding third-party assets unless their license allows redistribution in this repository.
 
+See [docs/asset_policy.md](docs/asset_policy.md) for the asset contribution policy.
+
 ## Trademarks And References
 
 Godot Auto Combat Kit is an independent open-source reference project. It is not affiliated with, endorsed by, or derived from any commercial mobile game. Names of other games or tools in documentation are used only as general technical or design context when needed.

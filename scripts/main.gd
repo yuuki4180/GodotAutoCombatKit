@@ -448,6 +448,8 @@ var merchant_choice_index := -1
 var merchant_purchase_count := 0
 var chest_open_count := 0
 var minimap_open := false
+var run_silver_earned := 0
+var run_silver_awarded := false
 var started := false
 var boss_spawned := false
 var test_mode := false
@@ -464,6 +466,7 @@ var next_enemy_id := 1
 
 var stash := {
 	"gold": 0,
+	"silver": 0,
 	"relics": 0,
 	"keys": 0,
 	"ore": 0,

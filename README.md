@@ -6,6 +6,10 @@ The project is intentionally small enough to study, but it already includes the 
 
 The goal is not just to ship a game. The goal is to make a practical, inspectable Godot reference for developers who want to understand how mobile action-game systems fit together in one playable loop.
 
+## Demo
+
+Demo media is tracked in [issue #5](https://github.com/yuuki4180/GodotAutoCombatKit/issues/5). The capture guide is in [docs/demo_media.md](docs/demo_media.md).
+
 ## Why This Exists
 
 Many Godot examples cover isolated mechanics. Godot Auto Combat Kit aims to be a practical reference for how those mechanics fit together in a phone-first action game loop:
@@ -100,6 +104,7 @@ Near-term work:
 
 See [docs/roadmap.md](docs/roadmap.md) for more detail.
 See [docs/ios_export.md](docs/ios_export.md) for public-safe iOS export guidance.
+See [docs/asset_policy.md](docs/asset_policy.md) for asset contribution and redistribution guidance.
 
 Open issues for contributors:
 
