@@ -12,6 +12,7 @@ The form asks for public GitHub profile/repository information. Before submittin
 - GitHub username: `[your public GitHub username]`
 - GitHub repository URL: `https://github.com/yuuki4180/GodotAutoCombatKit`
 - Latest release: `https://github.com/yuuki4180/GodotAutoCombatKit/releases/tag/v0.1.4-application-readiness`
+- Reviewer summary: `https://github.com/yuuki4180/GodotAutoCombatKit/blob/main/docs/reviewer_summary.md`
 - OpenAI Organization ID: `[from platform.openai.com]`
 
 ## Describe Your Role
@@ -77,4 +78,5 @@ Character count: 378
 - Roadmap issues are open in GitHub.
 - Public OSS rebrand release is published.
 - Asset policy and demo media guide are documented.
+- Reviewer summary and outreach drafts are documented.
 - Confirm the OpenAI Organization ID before submitting.
