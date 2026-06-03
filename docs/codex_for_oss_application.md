@@ -11,7 +11,7 @@ The form asks for public GitHub profile/repository information. Before submittin
 - Email: `[email associated with your ChatGPT account]`
 - GitHub username: `[your public GitHub username]`
 - GitHub repository URL: `https://github.com/yuuki4180/GodotAutoCombatKit`
-- Latest release: `https://github.com/yuuki4180/GodotAutoCombatKit/releases/tag/v0.1.4-application-readiness`
+- Latest release: `https://github.com/yuuki4180/GodotAutoCombatKit/releases/tag/v0.1.5-reviewer-readiness`
 - Reviewer summary: `https://github.com/yuuki4180/GodotAutoCombatKit/blob/main/docs/reviewer_summary.md`
 - OpenAI Organization ID: `[from platform.openai.com]`
 
